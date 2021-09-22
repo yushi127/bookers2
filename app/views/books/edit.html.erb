@@ -1,0 +1,35 @@
+
+</div>
+  <p id="notice"></p>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+        <% if @book.errors.any? %>
+          <%= @book.errors.count %>件のerror発生しました
+          <% @book.errors.full_messages.each do |message| %>
+            <p><%= message %></p>
+          <% end %>
+        <% end %>
+        <h2>Editing Book</h2>
+         </br>
+         <%= form_with(model: @book, local: true) do |f| %>
+          <label for="inputName">Title</label>
+          <%= f.text_field :title, autofocus: true, class:"mb-4 p-0 form-control w-100 margincenter",placeholder:"タイトル"%>
+
+
+          </br>
+
+          <label for="inputImage">introduction</label>
+          <%= f.text_area :body, autofocus: true, class:"mb-4 p-0 form-control w-100 margincenter",placeholder:"本文"%>
+
+          <%= f.submit "Update Book",class:"btn btn-secondary" %>
+        <% end %>
+        
+                
+        <P class="ml-3"><%= link_to "Show", book_path %> | <%= link_to "Back", books_path %></P>
+
+
+      </div>
+    </div>
+  </div>
+</div>

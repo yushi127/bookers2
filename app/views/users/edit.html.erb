@@ -1,0 +1,33 @@
+  <p id="notice"></p>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+        <% if @user.errors.any? %>
+          <%= @user.errors.count %>件のerror発生しました
+          <% @user.errors.full_messages.each do |message| %>
+            <p><%= message %></p>
+          <% end %>
+        <% end %>
+        <h2>User info</h2>
+         </br>
+        <%= form_with model:@user, local:true do |f| %>
+          <label for="inputName">Name</label>
+          <%= f.text_field :name, autofocus: true, class:"mb-4 p-0 form-control w-100 margincenter",placeholder:"ユーザーネーム"%>
+
+          <label for="inputImage">image</label>
+          </br>
+          <%= f.attachment_field :profile_image, placeholder: "プロフィール画像" %>
+          </br></br>
+
+          <label for="inputImage">introduction</label>
+          <%= f.text_area :introduction, autofocus: true, class:"mb-4 p-0 form-control w-100 margincenter",placeholder:"自己紹介"%>
+
+          <%= f.submit "Update User",class:"btn btn-secondary" %>
+        <% end %>
+        
+        <P class="ml-3"><%= link_to "Show", book_path %> | <%= link_to "Back", books_path %></P>
+
+      </div>
+    </div>
+  </div>
+
