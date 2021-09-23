@@ -14,17 +14,21 @@
     <div class="col-md-8 offset-md-1">
       <h2>Users</h2>
       <table width="100%">
-         <tr align="center" class= "bordery">
+         <tr class= "bordery">
            <th height="40">image</th>
-        　 <th>name</th>
-        　 <th></th>
+           <th>name</th>
+           <th></th>
          </tr>
          <% @users.each do |user| %>
           <tr>
-            <td><%= attachment_image_tag user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" ,size:'40x40'%></td>
-        　　<td height="40" class="m-1 pr-5"><%= user.name  %></td>
-            <td  height="40" class="m-1 pr-5"><%= link_to "show" , user_path(user) ,class:"m-1" %></td>
-        　</tr>
+            <td>
+              <%= link_to user_path(user) do %>
+                <%= attachment_image_tag user, :profile_image, fallback: "no_image.jpg",size:'40x40' %>
+              <% end %>
+            </td>
+            <td height="40" class="m-1"><%= user.name  %></td>
+            <td  height="40" class="m-1"><%= link_to "Show" , user_path(user) ,class:"m-1" %></td>
+          </tr>
          <% end %>
       </table>
     </div>

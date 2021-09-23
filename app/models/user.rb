@@ -6,24 +6,25 @@ class User < ApplicationRecord
     
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, 
-         :validatable, :authentication_keys => [:login]
+         :validatable
+        # , :authentication_keys => [:login]
 
-  has_many :post_images, dependent: :destroy
-  attr_accessor :login
+  # has_many :post_images, dependent: :destroy
+  # attr_accessor :login
 
   validates :name,
   :uniqueness => {
     :case_sensitive => false
   }
 
-  def self.find_first_by_auth_conditions(warden_conditions)
-    conditions = warden_conditions.dup
-    if login = conditions.delete(:login)
-      where(conditions).where(["name = :value OR lower(email) = lower(:value)", { :value => login }]).first
-    else
-      where(conditions).first
-    end
-  end
+  # def self.find_first_by_auth_conditions(warden_conditions)
+  #   conditions = warden_conditions.dup
+  #   if login = conditions.delete(:login)
+  #     where(conditions).where(["name = :value OR lower(email) = lower(:value)", { :value => login }]).first
+  #   else
+  #     where(conditions).first
+  #   end
+  # end
   
   
   validates :name,

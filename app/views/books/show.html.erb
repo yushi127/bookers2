@@ -14,19 +14,27 @@
     <div class="col-md-8 offset-md-1">
       <h2>Book detail</h2>
       <table width="100%">
-         <tr align="center" class= "bordery">
-           <th height="40">　</th>
-        　 <th>Title</th>
-        　 <th>Option</th>
+         <tr class= "bordery">
+           <th height="40"></th>
+           <th>Title</th>
+           <th>Option</th>
          </tr>
   
-          <tr >
-            <td  height="40" class="m-1 pr-5 "><%= attachment_image_tag @book.user, :profile_image, :fill, 10, 10, fallback: "no_image.jpg",size:'40x40',class:"marginauto" %><br><span><%= link_to @book.user.name, user_path(@user)%></span></td>
-            <td  height="40" class="m-1 pr-5"><%= link_to @book.title , book_path(@book) ,class:"m-1" %></td>
-        　　<td height="40" class="m-1 pr-5"><%= @book.body  %></td>
-        　　<td> <%= link_to "Edit" , edit_book_path(@book) ,class:"m-1 btn btn-sm btn-success edit_book_19631" %></td>
-        　　<td> <%= link_to 'Destroy' , book_path(@book), method: :delete, data:{ confirm: "Are You sure" },class:"m-1 btn btn-sm btn-danger destroy_book_19631"%></td>
-        　</tr>
+          <tr>
+
+            <td>
+              <%= link_to user_path(@book.user) do %>
+                <%= attachment_image_tag @book.user, :profile_image, fallback: "no_image.jpg",size:'40x40' %>
+              <% end %>
+              <br><%= link_to @book.user.name, user_path(@finduser)%>
+            </td>
+            <td  height="40" class="m-1"><%= link_to @book.title , book_path(@book) ,class:"m-1" %></td>
+            <td height="40" class="m-1"><%= @book.body  %></td>
+            <% if @user === @finduser %>
+              <td> <%= link_to "Edit" , edit_book_path(@book) ,class:"m-1 btn btn-sm btn-success edit_book_19631" %></td>
+              <td> <%= link_to 'Destroy' , book_path(@book), method: :delete, data:{ confirm: "Are You sure" },class:"m-1 btn btn-sm btn-danger destroy_book_19631"%></td>
+            <% end %>
+          </tr>
       </table>
     </div>
   </div>

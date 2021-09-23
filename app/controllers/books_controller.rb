@@ -1,10 +1,16 @@
 class BooksController < ApplicationController
+  before_action :set_user
+  before_action :move_to_signed_in, except: [:welcome,:about]
 
-
+  def move_to_signed_in
+    unless user_signed_in?
+      #サインインしていないユーザーはログインページが表示される
+      redirect_to  '/users/sign_in'
+    end
+  end
   def index
     @books=Book.all
     @book=Book.new
-    @user = current_user
   end
 
   def create
@@ -21,6 +27,9 @@ class BooksController < ApplicationController
 
   def edit
     @book = Book.find(params[:id])
+    unless @book.user_id === @user.id
+      redirect_to  books_path
+    end
   end
 
   def update
@@ -36,8 +45,8 @@ class BooksController < ApplicationController
   end
 
   def show
-    @user = current_user
     @book = Book.find(params[:id])
+    @finduser = @book.user
     @booknew=Book.new
   end
 
@@ -56,7 +65,9 @@ class BooksController < ApplicationController
   end
 
   private
-  
+  def set_user
+    @user = current_user
+  end
   def book_params
      params.require(:book).permit(:title,:body)
   end
