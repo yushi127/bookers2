@@ -2,9 +2,9 @@
     <h2>User info</h2>
     <%= attachment_image_tag user, :profile_image,  format: 'jpeg', fallback: "no_image.jpg" ,size:'100x100'%>
     <div class="d-flex justify-content-between bordery">
-      <p class="m-0">neme</p>
+      <p class="m-0">name</p>
       <p class="m-0"><%= user.name %></p>
     </div>
-    <p class="pt-2">introductin  <%= user.introduction %></p>
+    <p class="pt-2">introduction  <%= user.introduction %></p>
     <%= link_to  "", edit_user_path(user),class:"btn btn-outline-secondary btn-block fas fa-user-cog" %>
   </div>
